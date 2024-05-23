@@ -173,7 +173,7 @@ class PayPalModel
         foreach ($param as $k => $v) {
             if ($v instanceof PayPalModel) {
                 $ret[$k] = $v->toArray();
-            } else if (sizeof($v) <= 0 && is_array($v)) {
+            } else if (is_array($v) && sizeof($v) <= 0) {
                 $ret[$k] = array();
             } else if (is_array($v)) {
                 $ret[$k] = $this->_convertToArray($v);
@@ -184,7 +184,7 @@ class PayPalModel
         // If the array is empty, which means an empty object,
         // we need to convert array to StdClass object to properly
         // represent JSON String
-        if (sizeof($ret) <= 0) {
+        if (is_array($ret) && sizeof($ret) <= 0) {
             $ret = new PayPalModel();
         }
         return $ret;
